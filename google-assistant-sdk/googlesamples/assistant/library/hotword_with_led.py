@@ -20,6 +20,8 @@ from __future__ import print_function
 import argparse
 import os.path
 import json
+import time
+import threading
 import RPi.GPIO as GPIO
 
 import google.oauth2.credentials
@@ -28,7 +30,39 @@ from google.assistant.library import Assistant
 from google.assistant.library.event import EventType
 from google.assistant.library.file_helpers import existing_file
 
+PINS = [17,18,27]
 
+class Lights(object):
+    """Thread that controlls the lights
+    """
+    def __init__(self):
+        """Constructor"""
+        self.led = 0
+        self.mode = 0
+        self.lastmode = 0
+        thread = threading.Thread(target=self.run, args=())
+        thread.daemon = True
+        thread.start()
+    def run(self):
+        while True:
+            if self.mode == 1:
+                for led in PINS:
+                    on = GPIO.LOW
+                    if led == PINS[self.led]:
+                        on = GPIO.HIGH
+                    GPIO.output(led,on)
+                self.led += 1
+                if self.led > 2:
+                    self.led = 0
+            elif self.mode == 0 and self.lastmode != 0:
+                for led in PINS:
+                    GPIO.output(led,GPIO.LOW)
+                self.led = 0
+            self.lastmode = self.mode
+            time.sleep(0.2)
+
+lights = Lights()
+            
 def process_event(event):
     """Pretty prints events.
 
@@ -40,20 +74,22 @@ def process_event(event):
     """
     if event.type == EventType.ON_CONVERSATION_TURN_STARTED:
         print()
-        GPIO.output(18,GPIO.HIGH)
+        lights.mode = 1;
 
     print(event)
 
     if (event.type == EventType.ON_CONVERSATION_TURN_FINISHED and
             event.args and not event.args['with_follow_on_turn']):
         print()
-        GPIO.output(18,GPIO.LOW)
+        lights.mode = 0;
+
 
 
 def main():
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
-    GPIO.setup(18,GPIO.OUT)
+    for pin in PINS: 
+        GPIO.setup(pin,GPIO.OUT)
 
     parser = argparse.ArgumentParser(
         formatter_class=argparse.RawTextHelpFormatter)
