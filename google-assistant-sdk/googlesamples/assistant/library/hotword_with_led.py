@@ -26,6 +26,8 @@ import RPi.GPIO as GPIO
 
 import google.oauth2.credentials
 
+from subprocess import call
+
 from google.assistant.library import Assistant
 from google.assistant.library.event import EventType
 from google.assistant.library.file_helpers import existing_file
@@ -70,8 +72,12 @@ class Lights(object):
             time.sleep(0.2)
 
 lights = Lights()
+
+def reboot():
+    call(["/usr/bin/sudo","reboot"])
+    
             
-def process_event(event):
+def process_event(event,assistant):
     """Pretty prints events.
 
     Prints all events that occur with two spaces between each new
@@ -85,6 +91,10 @@ def process_event(event):
     if event.type == EventType.ON_CONVERSATION_TURN_STARTED:
         print()
         lights.mode = 1;
+    if event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED and event.args['text'] == 'reboot':
+        lights.mode = 3;
+        reboot();
+        assistant.stop_conversation();	
 
     print(event)
 
@@ -118,7 +128,7 @@ def main():
 
     with Assistant(credentials) as assistant:
         for event in assistant.start():
-            process_event(event)
+            process_event(event,assistant)
 
 
 if __name__ == '__main__':
