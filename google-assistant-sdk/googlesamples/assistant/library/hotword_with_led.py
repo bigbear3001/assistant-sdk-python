@@ -45,7 +45,7 @@ class Lights(object):
         thread.start()
     def run(self):
         while True:
-            if self.mode == 1:
+            if self.mode == 1: #running lights
                 for led in PINS:
                     on = GPIO.LOW
                     if led == PINS[self.led]:
@@ -54,7 +54,15 @@ class Lights(object):
                 self.led += 1
                 if self.led > 2:
                     self.led = 0
-            elif self.mode == 0 and self.lastmode != 0:
+            elif self.mode == 2: #blink 3 times
+                if self.led % 2 == 0:
+                    GPIO.output(PINS[0],GPIO.LOW)
+                elif self.led % 2 == 1:
+                    GPIO.output(PINS[0],GPIO.HIGH)
+                self.led += 1
+                if self.led == 9:
+                    self.mode = 0
+            if self.mode == 0 and self.lastmode != 0:
                 for led in PINS:
                     GPIO.output(led,GPIO.LOW)
                 self.led = 0
@@ -72,6 +80,8 @@ def process_event(event):
     Args:
         event(event.Event): The current event to process.
     """
+    if event.type == EventType.ON_START_FINISHED:
+        lights.mode = 2;
     if event.type == EventType.ON_CONVERSATION_TURN_STARTED:
         print()
         lights.mode = 1;
