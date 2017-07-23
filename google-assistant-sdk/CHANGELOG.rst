@@ -1,6 +1,22 @@
 Changelog
 =========
 
+
+0.3.3
+-------
+- Update Google Assistant Library from 0.0.2 to 0.0.3
+
+
+0.3.2
+--------
+- Bump urllib3 dependency.
+
+
+0.3.1
+--------
+- Bump dependencies to use new ``google-assistant-grpc`` package (faster install).
+
+
 0.3.0
 -----
 - Move grpc bindings to the `google-assistant-grpc <https://pypi.python.org/pypi/google-assistant-grpc>`_ package.
@@ -12,6 +28,7 @@ Changelog
 - Add ``--once`` flag to pushtotalk grpc sample (@r-clancy).
 - Fix typo in IFTTT handling in pushtotalk grpc sample (@kadeve).
 - Add ``google-assistant-library`` package `installation instructions <https://github.com/googlesamples/assistant-sdk-python/tree/master/google-assistant-library>`_ and `sample <https://github.com/googlesamples/assistant-sdk-python/tree/master/google-assistant-sdk/googlesamples/assistant/library>`_. 
+
 
 0.2.1
 -----

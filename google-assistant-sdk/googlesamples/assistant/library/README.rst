@@ -7,13 +7,13 @@ It demonstrates:
 - Initialization of the Assistant
 - Basic event handling including hotword detection.
 
-.. _package: https://github.com/googlesamples/assistant-sdk-python/tree/master/google-assistant-library.
+.. _package: https://github.com/googlesamples/assistant-sdk-python/tree/master/google-assistant-library
 
 Prerequisites
 -------------
 
 - `Python <https://www.python.org/>`_ >= 3.4
-- Raspberry Pi 3 running Rasbian (or any other ``linux-arm7l`` SBC)
+- SBC with ``linux-arm7l`` (eg: Rasbperry Pi 3) or ``linux-x86`` architecture.
 - A `Google API Console Project <https://console.developers.google.com>`_
 - A `Google account <https://myaccount.google.com/>`_
 
@@ -22,12 +22,10 @@ Setup
 
 - Install Python 3
 
-    - Ubuntu/Debian GNU/Linux::
+  - Ubuntu/Debian GNU/Linux::
 
-        sudo apt-get update
-        sudo apt-get install python3 python3-venv
-
-    - `MacOSX, Windows, Other <https://www.python.org/downloads/>`_
+      sudo apt-get update
+      sudo apt-get install python3 python3-venv
 
 - Create a new virtual environment (recommended)::
 
@@ -49,10 +47,8 @@ Authorization
 Run the sample
 --------------
 
-- Download the latest ``linux_arm7l`` wheel for the ``google_assistant_library`` from the `GitHub releases page`_.
-- Install the package and the sample dependencies using pip_::
+- Install the sample dependencies using pip_::
 
-    pip install --upgrade google_assistant_library-0.0.2-py2.py3-none-linux_armv7l.whl
     pip install --upgrade -r requirements.txt
 
 .. _pip: https://pip.pypa.io/

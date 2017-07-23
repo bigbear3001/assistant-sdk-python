@@ -20,14 +20,14 @@ Supported configuration
 -----------------------
 
 - Python ``>= 3.4``
-- Architecture: ``linux-arm7l``
+- Architecture: ``linux-arm7l`` and ``linux-x86_64``
 
 Installing
 ----------
 
-- Install the latest ``linux_arm7l`` wheel for the ``google_assistant_library`` package and its dependencies using pip_::
+- You can install using pip_.::
 
-    pip install --upgrade https://github.com/googlesamples/assistant-sdk-python/releases/download/0.3.0/google_assistant_library-0.0.2-py2.py3-none-linux_armv7l.whl
+    pip install --upgrade google-assistant-library
 
 Authorization
 -------------
@@ -46,7 +46,7 @@ Usage
 
     google-assistant-demo
 
-- Say "Ok Google", followed by a voice query. The demo should
+- Say "Ok Google" or "Hey Google" followed by a voice query. The demo should
   play back the Assistant's response and log events to the screen.
 
 Reference
@@ -63,7 +63,7 @@ See `LICENSE`_ and `LICENSE.third_party`_.
 .. _Python: https://www.python.org/
 .. _Google Assistant Library: https://developers.google.com/assistant/sdk/reference/library/python
 .. _Google Assistant SDK: https://developers.google.com/assistant/sdk
-.. _Getting Started Guide for Raspberry Pi and Python: https://developers.google.com/assistant/sdk/prototype/getting-started-pi-python/>
+.. _Getting Started with the Raspberry Pi and Python: https://developers.google.com/assistant/sdk/prototype/getting-started-pi-python/
 .. _pip: https://pip.pypa.io/
 .. _GitHub releases page: https://github.com/googlesamples/assistant-sdk-python/releases
 .. _Follow the steps: https://developers.google.com/assistant/sdk/prototype/getting-started-other-platforms/config-dev-project-and-account
