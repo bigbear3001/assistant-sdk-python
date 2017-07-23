@@ -75,6 +75,9 @@ lights = Lights()
 
 def reboot():
     call(["/usr/bin/sudo","reboot"])
+
+def shutdown():
+    call(["/usr/bin/sudo","shutdown"])
     
             
 def process_event(event,assistant):
@@ -95,6 +98,10 @@ def process_event(event,assistant):
         lights.mode = 3;
         reboot();
         assistant.stop_conversation();	
+    if event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED and (event.args['text'] == 'shutdown' or event.args['text'] == 'shut down'):
+        lights.mode = 3;
+        shutdown();
+        assistant.stop_conversation();
 
     print(event)
 
